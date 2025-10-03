@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajouter un produit</h1>
+
+    {{ form_start(form, { 'attr': { 'enctype': 'multipart/form-data' } }) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.price) }}
+        {{ form_row(form.images) }}
+
+        <input type="hidden" name="firebaseUid" id="firebaseUid">
+
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <script type="module">
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { auth } from "/js/firebase-config.js"; // ✅ le bon fichier maintenant
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("firebaseUid").value = user.uid;
+                console.log("Utilisateur connecté avec UID:", user.uid);
+            } else {
+                console.log("⚠️ Aucun utilisateur connecté");
+            }
+        });
+    </script>
+{% endblock %}

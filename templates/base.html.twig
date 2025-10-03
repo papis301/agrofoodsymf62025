@@ -9,9 +9,15 @@
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
+            
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        
+        {% block body %}
+        <h1>Bienvenue sur le Dashboard</h1>
+
+    {% endblock %}
+        <script type="module" src="/main.js"></script>
     </body>
 </html>
